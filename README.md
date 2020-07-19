@@ -1,2 +1,2 @@
-# spring-boot-cache
+# spring-boot-cache-demo
 Spring Boot Caching Demo
