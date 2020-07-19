@@ -1,6 +1,7 @@
 package com.abc.demo.service;
 
 import com.abc.demo.model.Employee;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 @Service
 public class EmployeeService {
 
+    @Cacheable(value = "employee_cache")
     public Employee getEmployeeById(Long id) {
         Map<Long, Employee> currentEmployeeMap = getCurrentEmployeeMap();
         return currentEmployeeMap.get(id);
