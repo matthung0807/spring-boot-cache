@@ -1,6 +1,7 @@
 package com.abc.demo.service;
 
 import com.abc.demo.model.Employee;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 @Service
 public class EmployeeService {
 
-    @Cacheable(value = "employee_cache")
+    @Cacheable(cacheNames = "employee_cache")
     public Employee getEmployeeById(Long id) {
         Map<Long, Employee> currentEmployeeMap = getCurrentEmployeeMap();
         return currentEmployeeMap.get(id);
@@ -23,6 +24,11 @@ public class EmployeeService {
         currentEmployeeMap.put(3L, Employee.builder().id(3L).name("carl").age(24).build());
         currentEmployeeMap.put(4L, Employee.builder().id(4L).name("dave").age(31).build());
         return currentEmployeeMap;
+    }
+
+    @CacheEvict(cacheNames = "employee_cache", allEntries = true)
+    public void cleanEmployeeCache() {
+        System.out.println("clean all data in employee_cache");
     }
 
 }

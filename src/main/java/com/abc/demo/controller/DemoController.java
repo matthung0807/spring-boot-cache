@@ -18,4 +18,9 @@ public class DemoController {
         return employeeService.getEmployeeById(id);
     }
 
+    @GetMapping("/employee/clean-cache")
+    public void cleanEmployeeCache() {
+        employeeService.cleanEmployeeCache();
+    }
+
 }
